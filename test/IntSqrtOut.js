@@ -23,7 +23,7 @@ describe("integer square root computation", function() {
         await circuit.loadConstraints();
     });
 
-    it("given 2 returns 4", async () => {
+    it("given 4 returns 2", async () => {
 
         let witness = await circuit.calculateWitness({
             "in": 4
