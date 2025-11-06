@@ -44,12 +44,10 @@ template IntSqrt(n) {
     But if we wanted them to not to wrap around, we would need to add extra constraints.
     */
 
-    component in_range0 = LessThan(n);
-    in_range0.in[0] <== in[0];
+    component n2b_sqrt = Num2Bits(125);
+    n2b_sqrt.in <== in[0];
     // 2^125, why 125 
     // if 126 then gte.in[0] <== (in[0] + 1) * (in[0] + 1) will be gte.in[0] = 2**252, which is 253 bit long but the GreaterThan circuit is accepting 252 bit long numbers only.
-    in_range0.in[1] <== (1 << (125));  
-    in_range0.out === 1;
 
 
     component lte = LessEqThan(n);

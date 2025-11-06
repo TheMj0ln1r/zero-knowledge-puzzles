@@ -53,12 +53,10 @@ template IntSqrtOut(n) {
     // work from IntSqrt
 
     // Input overflow check
-    component in_range0 = LessThan(n);
-    in_range0.in[0] <== out;
+    component n2b_sqrt = Num2Bits(125);
+    n2b_sqrt.in <== in;
     // 2^125, why 125 
     // if 126 then gte.in[0] <== (in + 1) * (in + 1) will be gte.in[0] = 2**252, which is 253 bit long but the GreaterThan circuit is accepting 252 bit long numbers only.
-    in_range0.in[1] <== (1 << (125));
-    in_range0.out === 1;
 
     component lte = LessEqThan(n);
     lte.in[0] <== out * out;
