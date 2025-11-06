@@ -8,6 +8,17 @@ pragma circom 2.1.8;
 template MultiAND(n) {
     signal input in[n];
     signal output out;
+    
+    for (var i = 0; i < n; i++){
+        in[i]*(in[i]-1) === 0;
+    }
+
+    signal prod[n];
+    prod[0] <== in[0];
+    for (var i = 1; i < n; i++){
+        prod[i] <== prod[i-1] * in[i];
+    }
+    out <== prod[n-1];
 
 }
 

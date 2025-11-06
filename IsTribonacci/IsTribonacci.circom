@@ -1,8 +1,5 @@
 pragma circom 2.1.8;
 
-// Create constraints that enforces all signals
-// in `in` are binary, i.e. 0 or 1.
-
 template IsTribonacci(n) {
     signal input in[n];
     assert (n >= 3);
@@ -12,7 +9,13 @@ template IsTribonacci(n) {
     // The three first are 0, 1, 1,
     // the rest are the sum of the previous three
     // circuit must work for arbitrary n
+    in[0] === 0;
+    in[1] === 1;
+    in[2] === 1;
 
+    for (var i = 3; i < n; i++){
+        in[i] === in[i-1] + in[i-2] + in[i-3];
+    }
 }
 
 component main = IsTribonacci(9);
